@@ -21,31 +21,39 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Evidence extends Model
 {
-    
-    static $rules = [
-		'information' => 'required',
-		'evidenceable_id' => 'required',
-		'evidenceable_type' => 'required',
-		'state_id' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'information' => 'required',
+    'evidenceable_id' => 'required',
+    'evidenceable_type' => 'required',
+    'state_id' => 'required',
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['information','evidenceable_id','evidenceable_type','state_id'];
+  protected $perPage = 20;
+
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['information', 'evidenceable_id', 'evidenceable_type', 'state_id'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function state()
-    {
-        return $this->hasOne('App\Models\State', 'id', 'state_id');
-    }
-    
-
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   */
+  public function state()
+  {
+    return $this->hasOne('App\Models\State', 'id', 'state_id');
+  }
+  //Relación o-m polimórfica
+  public function comment()
+  {
+    return $this->morphMany('App\Models\Comment', 'commentable'); //Recuperar los registros de la relación
+  }
+  //Relación o-m polimórfica
+  public function files()
+  {
+    return $this->morphMany('App\Models\File', 'fileable'); //Recuperar los registros de la relación
+  }
 }

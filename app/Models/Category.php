@@ -19,28 +19,32 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
-    
-    static $rules = [
-		'category' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'category' => 'required',
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['category','descriptionCategory'];
+  protected $perPage = 20;
+
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['category', 'descriptionCategory'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function categorizables()
-    {
-        return $this->hasMany('App\Models\Categorizable', 'category_id', 'id');
-    }
-    
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasMany
+   */
+  public function categorizables()
+  {
+    return $this->hasMany('App\Models\Categorizable', 'category_id', 'id');
+  }
 
+  //R m-m inversa polimórfica
+  public function projects()
+  {
+    return $this->morphToMany('App\Models\Project', 'categorizable');
+  }
 }

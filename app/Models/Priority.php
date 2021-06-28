@@ -20,10 +20,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Priority extends Model
 {
-    
+
     static $rules = [
-		'priority' => 'required',
-		'descriptionPriority' => 'required',
+        'priority' => 'required',
+        'descriptionPriority' => 'required',
     ];
 
     protected $perPage = 20;
@@ -33,7 +33,7 @@ class Priority extends Model
      *
      * @var array
      */
-    protected $fillable = ['priority','descriptionPriority'];
+    protected $fillable = ['priority', 'descriptionPriority'];
 
 
     /**
@@ -43,7 +43,7 @@ class Priority extends Model
     {
         return $this->hasMany('App\Models\Task', 'priority_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -51,6 +51,8 @@ class Priority extends Model
     {
         return $this->hasMany('App\Models\Test', 'priority_id', 'id');
     }
-    
-
+    public function priorityable()
+    {
+        return $this->morphTo(); //Relación polomófica
+    }
 }

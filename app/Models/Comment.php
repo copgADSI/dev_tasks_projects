@@ -46,6 +46,22 @@ class Comment extends Model
     {
         return $this->hasOne('App\Models\Member', 'id', 'member_id');
     }
+
+    public function commentable()
+    {
+      return $this->morphTo(); //Relación polomófica
+    }
+    //Relación o-m polimórfica
+    public function files()
+    {
+      return $this->morphMany('App\Models\File', 'fileable'); //Recuperar los registros de la relación
+    }
+  
+    //Relación polimórfica
+    /* public function member()
+    {
+      return $this->belongsTo('App\Models\Member');
+    } */
     
 
 }

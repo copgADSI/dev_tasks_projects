@@ -35,6 +35,9 @@ class File extends Model
      */
     protected $fillable = ['file','fileable_id','fileable_type'];
 
-
+    public function fileable()
+    {
+      return $this->morphTo(); //Relación polomófica
+    }
 
 }

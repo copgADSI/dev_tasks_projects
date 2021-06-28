@@ -71,5 +71,15 @@ class Task extends Model
         return $this->hasOne('App\Models\State', 'id', 'state_id');
     }
     
+     //Relación o-m polimórfica
+  public function comment()
+  {
+    return $this->morphMany('App\Models\Comment', 'commentable'); //Recuperar los registros de la relación
+  }
+  //Relación o-m polimórfica
+  public function files()
+  {
+    return $this->morphMany('App\Models\File', 'fileable'); //Recuperar los registros de la relación
+  }
 
 }

@@ -25,13 +25,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Project extends Model
 {
-    
+
     static $rules = [
-		'description' => 'required',
-		'phoneClient' => 'required',
-		'nameClient' => 'required',
-		'documentClient' => 'required',
-		'state_id' => 'required',
+        'description' => 'required',
+        'phoneClient' => 'required',
+        'nameClient' => 'required',
+        'documentClient' => 'required',
+        'state_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -41,7 +41,7 @@ class Project extends Model
      *
      * @var array
      */
-    protected $fillable = ['description','phoneClient','nameClient','documentClient','user_id','state_id'];
+    protected $fillable = ['description', 'phoneClient', 'nameClient', 'documentClient', 'user_id', 'state_id'];
 
 
     /**
@@ -51,7 +51,7 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Member', 'project_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -59,7 +59,7 @@ class Project extends Model
     {
         return $this->hasOne('App\Models\State', 'id', 'state_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -67,6 +67,11 @@ class Project extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
-    
 
+    //Relaciòn m-m polimòrfica
+
+    public function projects()
+    {
+        return $this->morphToMany('App\Models\Category', 'categorizable');
+    }
 }
